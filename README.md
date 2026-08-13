@@ -1,23 +1,19 @@
-## Day 3 — Baseline and Logistic Regression
+## Day 6 — Model Diagnostics and Failure Analysis
 
-Two classification approaches were evaluated:
+The final model was evaluated on the held-out test set.
 
-1. **Dummy Classifier**
-   - Used as a simple baseline.
-   - Predicts the majority class and provides a minimum benchmark.
+### Diagnostics
 
-2. **Logistic Regression**
-   - Used as the first machine learning model.
-   - Combined with the preprocessing pipeline to ensure preprocessing and training remain reproducible.
+The evaluation included:
 
-### Evaluation Metrics
+- Classification report
+- Confusion matrix
+- ROC curve and ROC-AUC score
+- Feature importance analysis
+- Incorrect prediction analysis
 
-The models were evaluated using:
+### Failure Analysis
 
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- ROC-AUC
+All incorrect predictions were extracted and saved for manual inspection. The analysis focused on identifying potential patterns among false positives and false negatives.
 
-The Logistic Regression model was compared against the Dummy Classifier to verify that the machine learning model performs better than a simple majority-class baseline.
+Because the dataset is relatively small and moderately imbalanced, model performance was not evaluated using accuracy alone. Precision, recall, F1-score, and ROC-AUC were also considered.

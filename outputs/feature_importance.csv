@@ -1,0 +1,21 @@
+Feature,Importance
+num__Credit_History,0.40556854726598635
+num__LoanAmount,0.12130347386054005
+num__CoapplicantIncome,0.11816961785327404
+num__ApplicantIncome,0.11121122681654755
+num__Loan_Amount_Term,0.03813670936716848
+cat__Property_Area_Semiurban,0.03143995267082769
+cat__Property_Area_Rural,0.02224001046573892
+cat__Married_No,0.019080844496837213
+cat__Education_Graduate,0.016104625593784068
+cat__Married_Yes,0.01363052698299853
+cat__Self_Employed_Yes,0.01355289539323722
+cat__Education_Not Graduate,0.01353971889792155
+cat__Dependents_0,0.013271849714767102
+cat__Property_Area_Urban,0.013189704542980211
+cat__Gender_Female,0.010659662756444921
+cat__Dependents_1,0.010155941891926729
+cat__Gender_Male,0.008743898301495833
+cat__Dependents_2,0.00781327563206954
+cat__Self_Employed_No,0.007265873321178154
+cat__Dependents_3+,0.0049216441742758864
