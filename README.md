@@ -1,81 +1,103 @@
-## Day 6 — Model Diagnostics and Failure Analysis
+# Loan Approval Prediction — End-to-End Machine Learning Pipeline
 
-The final model was evaluated on the held-out test set.
+## 📌 Project Overview
 
-### Diagnostics
+This project builds an end-to-end machine learning pipeline to predict whether a loan application is likely to be approved or rejected.
 
-The evaluation included:
+The project focuses not only on training a model but also on building a reproducible machine learning workflow, including data exploration, preprocessing, baseline comparison, model training, hyperparameter tuning, evaluation, and failure analysis.
 
-- Classification report
-- Confusion matrix
-- ROC curve and ROC-AUC score
-- Feature importance analysis
-- Incorrect prediction analysis
+---
 
-## Failure Analysis
+## 🎯 Problem Statement
 
-The final model made 11 incorrect predictions out of 77 test samples, resulting in a failure rate of 14.29%.
+Financial institutions receive many loan applications and need to evaluate multiple factors before making approval decisions.
 
-The confusion matrix showed:
+The goal of this project is to predict:
 
-- 14 correctly predicted rejected applications
-- 52 correctly predicted approved applications
-- 8 rejected applications incorrectly predicted as approved
-- 3 approved applications incorrectly predicted as rejected
+> **Will a loan application be approved or rejected based on the available applicant information?**
 
-The model showed stronger performance for the approved class, with a recall of 95%, compared with 64% recall for rejected applications.
+This is a **binary classification problem**.
 
-Some incorrect predictions also had relatively high predicted approval probabilities, indicating that model confidence does not guarantee correctness.
+### Target Variable
 
-### Feature Importance
+`Loan_Status`
 
-The most influential feature was `Credit_History`, with an importance score of approximately 0.41. Other important features included:
+- `Y` → Loan Approved
+- `N` → Loan Rejected
 
-- Loan Amount
-- Co-applicant Income
+---
+
+## 📊 Dataset
+
+The dataset contains **381 loan applicant records**.
+
+Features include:
+
+- Gender
+- Married
+- Dependents
+- Education
+- Self Employed
 - Applicant Income
+- Co-applicant Income
+- Loan Amount
+- Loan Amount Term
+- Credit History
+- Property Area
 
-The strong dependence on credit history means that missing, inaccurate, or biased credit history information could significantly affect predictions.
+The identifier column `Loan_ID` was removed because it does not provide useful predictive information.
 
-## Model Evaluation
+---
 
-The final tuned model was evaluated on a held-out test set of 77 samples.
+## 🎯 Evaluation Metrics
 
-| Metric | Score |
-|---|---:|
-| Accuracy | 0.86 |
-| ROC-AUC | 0.8149 |
-| Rejected F1-score | 0.72 |
-| Approved F1-score | 0.90 |
-| Incorrect Predictions | 11 |
-| Failure Rate | 14.29% |
+The dataset contains a class imbalance:
 
-### Classification Performance
+- Approved: approximately **71%**
+- Rejected: approximately **29%**
 
-The model performed better at predicting approved loans than rejected loans.
+Therefore, accuracy alone was not sufficient.
 
-- Approved recall: **95%**
-- Rejected recall: **64%**
+The following metrics were used:
 
-This difference is likely influenced by the class imbalance in the dataset, where approximately 71% of applications were approved and 29% were rejected.
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
 
-Therefore, accuracy alone was not used to evaluate the model. Precision, recall, F1-score, and ROC-AUC were also considered.
+ROC-AUC was particularly useful for evaluating how well the model separates approved and rejected applications.
 
+---
 
-## Model Limitations
+# 🏗️ Project Structure
 
-This model has several important limitations:
-
-1. The dataset contains only 381 records, so the evaluation results may vary with different train-test splits.
-
-2. The dataset has a class imbalance, with approximately 71% approved and 29% rejected applications.
-
-3. The model performs better at identifying approved applications than rejected applications.
-
-4. The model relies heavily on `Credit_History`, so missing or inaccurate values for this feature may significantly affect predictions.
-
-5. Important real-world variables such as detailed credit scores, existing debt, employment stability, repayment history, and economic conditions are not included.
-
-6. Historical approval data may contain bias that can be learned and reproduced by the model.
-
-7. The model should not be used as the sole basis for real-world lending decisions.
+```text
+loan-approval-ml-pipeline/
+│
+├── data/
+│   └── loan_data.csv
+│
+├── src/
+│   ├── eda.py
+│   ├── preprocess.py
+│   ├── train_baseline.py
+│   ├── train_random_forest.py
+│   ├── tune_model.py
+│   └── evaluate_model.py
+│
+├── models/
+│   └── best_loan_model.pkl
+│
+├── outputs/
+│   ├── day3_model_comparison.csv
+│   ├── day4_random_forest_results.csv
+│   ├── classification_report.txt
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── failure_cases.csv
+│   └── feature_importance.csv
+│
+├── requirements.txt
+├── .gitignore
+└── README.md
